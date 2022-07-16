@@ -9,6 +9,14 @@ Resources:
       CodeUri: s3://aws-lambda-function-python/129c4cca25e73b38195763925721348e
       Handler: app.handler
       Runtime: python3.8
+      Layers:
+      - Ref: Layer
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /path
+            Method: get
       Environment:
         Variables:
           databaseName: lambdadb
@@ -22,3 +30,13 @@ Resources:
           Resource: '*'
     Metadata:
       SamResourceId: myDateTimeFunction
+  Layer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: aws-lambda-layer
+      CompatibleRuntimes:
+      - python3.8
+      Description: Lambda layer with libs like pocket and datetime
+      ContentUri: s3://aws-lambda-function-python/4e27cccf55606dc0211e5842be5a4fed
+    Metadata:
+      SamResourceId: Layer

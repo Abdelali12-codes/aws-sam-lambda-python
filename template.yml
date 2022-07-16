@@ -44,5 +44,7 @@ Resources:
     Type: AWS::Serverless::LayerVersion
     Properties:
       LayerName: aws-lambda-layer
+      CompatibleRuntimes: 
+           - python3.8
       Description: Lambda layer with libs like pocket and datetime
       ContentUri: ./libs
