@@ -1,0 +1,20 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: A sample SAM template for deploying Lambda functions.
+Resources:
+  myDateTimeFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: awslambdafunctionwithpython
+      CodeUri: s3://aws-lambda-function-python/3b6b5908ecb3911d9a6b6ef7478edf12
+      Handler: app.handler
+      Runtime: python3.8
+      Policies:
+      - Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Action:
+          - lambda:InvokeFunction
+          Resource: '*'
+    Metadata:
+      SamResourceId: myDateTimeFunction

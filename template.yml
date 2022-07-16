@@ -1,0 +1,29 @@
+AWSTemplateFormatVersion : '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: A sample SAM template for deploying Lambda functions.
+
+Resources:
+# Details about the myDateTimeFunction Lambda function
+  myDateTimeFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: awslambdafunctionwithpython
+      CodeUri: ./code
+      Handler: app.handler
+      Runtime: python3.8      
+     # AutoPublishAlias: live
+# Grants this function permission to call lambda:InvokeFunction
+      Policies:
+        - Version: "2012-10-17"
+          Statement: 
+          - Effect: "Allow"
+            Action: 
+              - "lambda:InvokeFunction"
+            Resource: '*'
+     # DeploymentPreference:
+# Specifies the deployment configuration      
+        #  Type: Linear10PercentEvery1Minute
+# Specifies Lambda functions for deployment lifecycle hooks
+        #  Hooks:
+        #    PreTraffic: !Ref beforeAllowTraffic
+        #    PostTraffic: !Ref afterAllowTraffic
