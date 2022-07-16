@@ -16,7 +16,7 @@ that reside in requirements.txt file or package.json
 
 ```
 aws s3 mb s3://name-of-bucket
-``
+```
 
 ## create package artificats 
 
