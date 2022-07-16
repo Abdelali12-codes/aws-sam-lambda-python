@@ -10,15 +10,7 @@ Resources:
       FunctionName: awslambdafunctionwithpython
       CodeUri: ./code
       Handler: app.handler
-      Runtime: python3.8
-      Layers:
-        - !Ref Layer
-      Events:
-       ApiEvent:
-         Type: Api
-         Properties:
-           Path: /path
-           Method: get      
+      Runtime: python3.8      
      # AutoPublishAlias: live
 # Grants this function permission to call lambda:InvokeFunction
       Policies:
@@ -28,12 +20,6 @@ Resources:
             Action: 
               - "lambda:InvokeFunction"
             Resource: '*'
-  Layer:
-    Type: AWS::Serverless::LayerVersion
-    Properties:
-      LayerName: pocket-readtime-tagger-layer
-      Description: Lambda layer with libs like pocket and datetime
-      ContentUri: ./libs
      # DeploymentPreference:
 # Specifies the deployment configuration      
         #  Type: Linear10PercentEvery1Minute
