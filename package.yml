@@ -6,9 +6,17 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: awslambdafunctionwithpython
-      CodeUri: s3://aws-lambda-function-python/3b6b5908ecb3911d9a6b6ef7478edf12
+      CodeUri: s3://aws-lambda-function-python/8359c7b64fac62ec56bab10911d907ff
       Handler: app.handler
       Runtime: python3.8
+      Layers:
+      - Ref: Layer
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /path
+            Method: get
       Policies:
       - Version: '2012-10-17'
         Statement:
@@ -18,3 +26,11 @@ Resources:
           Resource: '*'
     Metadata:
       SamResourceId: myDateTimeFunction
+  Layer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: pocket-readtime-tagger-layer
+      Description: Lambda layer with libs like pocket and datetime
+      ContentUri: s3://aws-lambda-function-python/abf2fa069416b4db1a3e7b65ece2cd5d
+    Metadata:
+      SamResourceId: Layer
