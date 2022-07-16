@@ -6,9 +6,13 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: awslambdafunctionwithpython
-      CodeUri: s3://aws-lambda-function-python/3b6b5908ecb3911d9a6b6ef7478edf12
+      CodeUri: s3://aws-lambda-function-python/129c4cca25e73b38195763925721348e
       Handler: app.handler
       Runtime: python3.8
+      Environment:
+        Variables:
+          databaseName: lambdadb
+          databaseUser: admin
       Policies:
       - Version: '2012-10-17'
         Statement:

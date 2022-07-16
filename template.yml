@@ -10,7 +10,19 @@ Resources:
       FunctionName: awslambdafunctionwithpython
       CodeUri: ./code
       Handler: app.handler
-      Runtime: python3.8      
+      Runtime: python3.8
+      Layers:
+       - !Ref Layer
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /path
+            Method: get
+      Environment:
+        Variables:
+          databaseName: lambdadb
+          databaseUser: admin      
      # AutoPublishAlias: live
 # Grants this function permission to call lambda:InvokeFunction
       Policies:
@@ -27,3 +39,10 @@ Resources:
         #  Hooks:
         #    PreTraffic: !Ref beforeAllowTraffic
         #    PostTraffic: !Ref afterAllowTraffic
+    
+  Layer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: aws-lambda-layer
+      Description: Lambda layer with libs like pocket and datetime
+      ContentUri: ./libs
